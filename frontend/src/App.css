@@ -1,0 +1,120 @@
+.App {
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.card {
+  background: var(--card);
+  color: var(--text);
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--green-1) 0%, var(--green-2) 100%);
+  color: #fff;
+  border-radius: 14px;
+  padding: 16px 36px;
+  font-size: 18px;
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgba(67, 160, 71, 0.35);
+  transition: all 0.25s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(67, 160, 71, 0.5);
+  background: linear-gradient(135deg, var(--green-hover) 0%, var(--green-2) 100%);
+}
+
+.btn-secondary {
+  background: var(--bg-secondary);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  background: var(--border);
+  transform: translateY(-2px);
+}
+
+.select {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  background: var(--card);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--green-2);
+}
+
+.input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  background: var(--card);
+  color: var(--text);
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--green-2);
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: var(--text);
+  font-size: 18px;
+}
+
+.error {
+  background: var(--error-bg);
+  color: var(--error-text);
+  padding: 15px;
+  border-radius: 8px;
+  margin: 20px 0;
+  border-left: 4px solid var(--error-border);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.success {
+  background: var(--success-bg);
+  color: var(--success-text);
+  padding: 15px;
+  border-radius: 8px;
+  margin: 20px 0;
+  border-left: 4px solid var(--success-border);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

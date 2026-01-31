@@ -1,0 +1,126 @@
+/* Market Price Dashboard Styles */
+
+.market-price-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8f5e9 100%);
+    padding: 2rem 1rem;
+}
+
+/* Loading Animation */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #4CAF50;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 2rem auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .market-price-page {
+        padding: 1rem 0.5rem;
+    }
+}
+
+/* Utility Classes */
+.text-agro-green-600 {
+    color: #2e7d32;
+}
+
+.text-agro-green-700 {
+    color: #1b5e20;
+}
+
+.text-agro-green-800 {
+    color: #1b5e20;
+}
+
+.text-agro-green-900 {
+    color: #0d3d12;
+}
+
+.bg-agro-green-50 {
+    background-color: #e8f5e9;
+}
+
+.bg-agro-green-100 {
+    background-color: #c8e6c9;
+}
+
+.bg-agro-green-200 {
+    background-color: #a5d6a7;
+}
+
+.bg-agro-green-600 {
+    background-color: #2e7d32;
+}
+
+.bg-agro-green-700 {
+    background-color: #1b5e20;
+}
+
+.bg-agro-green-800 {
+    background-color: #1b5e20;
+}
+
+.border-agro-green-200 {
+    border-color: #a5d6a7;
+}
+
+.border-agro-green-300 {
+    border-color: #81c784;
+}
+
+.border-agro-green-500 {
+    border-color: #4caf50;
+}
+
+.hover\:bg-agro-green-600:hover {
+    background-color: #2e7d32;
+}
+
+.hover\:from-agro-green-700:hover {
+    --tw-gradient-from: #1b5e20;
+}
+
+.hover\:to-agro-green-800:hover {
+    --tw-gradient-to: #1b5e20;
+}
+
+.from-agro-green-600 {
+    --tw-gradient-from: #2e7d32;
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(46, 125, 50, 0));
+}
+
+.to-agro-green-700 {
+    --tw-gradient-to: #1b5e20;
+}
+
+.from-agro-green-800 {
+    --tw-gradient-from: #1b5e20;
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(27, 94, 32, 0));
+}
+
+.via-white {
+    --tw-gradient-stops: var(--tw-gradient-from), #ffffff, var(--tw-gradient-to, rgba(255, 255, 255, 0));
+}
+
+.focus\:ring-agro-green-200:focus {
+    --tw-ring-color: #a5d6a7;
+}
+
+.focus\:border-agro-green-500:focus {
+    border-color: #4caf50;
+}
+
+.bg-agro-green-500 {
+    background-color: #4caf50;
+}

@@ -1,0 +1,106 @@
+.navbar {
+  background: var(--card);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  padding: 15px 0;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-logo {
+  font-size: 24px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  /* 🔥 KEY LINE */
+  gap: 8px;
+  /* space between logo & text */
+  line-height: 1;
+  /* 🔥 prevents vertical drift */
+  color: var(--green-1);
+}
+
+.navbar-logo img,
+.navbar-logo svg {
+  height: 28px;
+  /* adjust once */
+  width: auto;
+  display: block;
+  /* removes inline-img baseline gap */
+}
+
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+  align-items: center;
+}
+
+.navbar-menu li a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar-menu li a:hover {
+  color: var(--green-1);
+}
+
+@media (max-width: 768px) {
+  .navbar-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .navbar-menu {
+    gap: 20px;
+  }
+}
+
+/* Weather Icon Styles */
+.weather-icon-item {
+  display: flex;
+  align-items: center;
+}
+
+.weather-icon {
+  font-size: 28px;
+  cursor: pointer;
+  display: inline-block;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.4s ease;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Hover effect - smaller growth */
+.weather-icon:hover {
+  transform: scale(1.4);
+  filter: drop-shadow(0 6px 12px rgba(255, 193, 7, 0.4));
+}
+
+/* Active/clicked effect - larger growth */
+.weather-icon-active {
+  transform: scale(1.9);
+  filter: drop-shadow(0 10px 25px rgba(255, 193, 7, 0.5));
+}
+
+/* Hover on active state - even more premium feel */
+.weather-icon-active:hover {
+  transform: scale(2.0);
+  filter: drop-shadow(0 12px 30px rgba(255, 193, 7, 0.6));
+}

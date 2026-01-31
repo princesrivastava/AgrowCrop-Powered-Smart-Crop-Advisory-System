@@ -1,0 +1,74 @@
+# Production Docker Compose
+# Use this for actual deployment with optimized builds
+
+version: "3.8"
+
+services:
+
+  mongo:
+    image: mongo:7
+    container_name: agrocrop-mongo-prod
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER:-admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:-secure_password_change_me}
+      MONGO_INITDB_DATABASE: agrocrop
+    volumes:
+      - mongo_prod_data:/data/db
+    networks:
+      - agrocrop-prod-network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/agrocrop --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./java-service
+      args:
+        - MAVEN_OPTS=-Xmx512m
+    container_name: agrocrop-backend-prod
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://${MONGO_USER:-admin}:${MONGO_PASSWORD:-secure_password_change_me}@mongo:27017/agrocrop?authSource=admin
+      SPRING_DATA_MONGODB_DATABASE: agrocrop
+      SPRING_PROFILES_ACTIVE: production
+      JAVA_OPTS: -Xms256m -Xmx512m
+    networks:
+      - agrocrop-prod-network
+    healthcheck:
+      test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/api/market-prices/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+    container_name: agrocrop-frontend-prod
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - agrocrop-prod-network
+
+volumes:
+  mongo_prod_data:
+    driver: local
+
+networks:
+  agrocrop-prod-network:
+    driver: bridge
