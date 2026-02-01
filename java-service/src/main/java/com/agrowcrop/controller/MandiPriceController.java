@@ -126,11 +126,7 @@ public class MandiPriceController {
      * Health check endpoint
      */
     @GetMapping("/health")
-    public Map<String, Object> healthCheck() {
-        long totalRecords = mandiPriceRepo.count();
-        return Map.of(
-                "status", "OK",
-                "service", "Market Price Dashboard",
-                "totalPriceRecords", totalRecords);
+    public org.springframework.http.ResponseEntity<String> healthCheck() {
+        return org.springframework.http.ResponseEntity.ok("OK");
     }
 }

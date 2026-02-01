@@ -35,7 +35,9 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .cors(org.springframework.security.config.Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**", "/api/public/**", "/api/recommendations/**").permitAll()
+                        .requestMatchers("/api/auth/**", "/api/public/**", "/api/recommendations/**",
+                                "/api/market-prices/health", "/health")
+                        .permitAll()
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(
                         oauth2 -> oauth2.jwt(org.springframework.security.config.Customizer.withDefaults()));
