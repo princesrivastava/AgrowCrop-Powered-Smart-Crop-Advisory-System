@@ -10,28 +10,23 @@ import Navbar from './components/Navbar'
 import Login from './components/auth/Login'
 import SignUpPage from './components/auth/SignUp'
 import WeatherBackground from './components/WeatherBackground'
+import ProtectedRoute from './components/ProtectedRoute'
 import { WeatherProvider } from './context/WeatherContext'
 import { AuthProvider, useAuth } from './context/AuthProvider'
 
 console.log("App rendered");
 
-const ProtectedRoute = ({ children }) => {
-  const { isAuthenticated, isLoaded } = useAuth();
-  if (!isLoaded) return <div>Loading...</div>;
-  if (!isAuthenticated) return <Navigate to="/login" replace />;
-  return children;
-};
-
-// Inner App component that consumes Auth Context
-const AppContent = () => {
+// Inner App component that consumes Auth Context to access isAuthenticated
+const AppRoutes = () => {
   const { isAuthenticated } = useAuth();
 
   return (
     <div className="App">
       <Navbar />
       <Routes>
-        <Route path="/login" element={isAuthenticated ? <Navigate to="/" /> : <Login />} />
-        <Route path="/sign-up" element={isAuthenticated ? <Navigate to="/" /> : <SignUpPage />} />
+        {/* Public Routes - Redirect to Home if already authenticated */}
+        <Route path="/login" element={isAuthenticated ? <Navigate to="/" replace /> : <Login />} />
+        <Route path="/sign-up" element={isAuthenticated ? <Navigate to="/" replace /> : <SignUpPage />} />
 
         {/* Protected Routes */}
         <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
@@ -56,7 +51,7 @@ function App() {
           }}
         >
           <WeatherBackground />
-          <AppContent />
+          <AppRoutes />
         </Router>
       </WeatherProvider>
     </AuthProvider>

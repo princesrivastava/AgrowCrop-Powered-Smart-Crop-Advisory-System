@@ -1,14 +1,16 @@
 
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { UserButton, useAuth } from "@clerk/clerk-react";
+import { UserButton } from "@clerk/clerk-react";
 import ThemeToggle from './ThemeToggle'
 import { useWeather } from '../context/WeatherContext'
+import { useAuth } from '../context/AuthProvider'
 import { NavbarWeatherIcon, WeatherStatusIcon } from './WeatherIcons'
 import './Navbar.css'
 
 const Navbar = () => {
   const { isWeatherVisible, toggleWeather, weather } = useWeather()
+  const { isAuthenticated } = useAuth()
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -66,7 +68,27 @@ const Navbar = () => {
           </li>
           <li>
             <div style={{ marginLeft: '10px', display: 'flex', alignItems: 'center' }}>
-              <UserButton afterSignOutUrl="/" />
+              {isAuthenticated ? (
+                <UserButton afterSignOutUrl="/" />
+              ) : (
+                <Link
+                  to="/login"
+                  className="btn-login-nav"
+                  style={{
+                    padding: '8px 20px',
+                    backgroundColor: '#2e7d32',
+                    color: 'white',
+                    borderRadius: '20px',
+                    textDecoration: 'none',
+                    fontWeight: '600',
+                    fontSize: '14px',
+                    transition: 'all 0.3s ease'
+                  }}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Login
+                </Link>
+              )}
             </div>
           </li>
         </ul>
