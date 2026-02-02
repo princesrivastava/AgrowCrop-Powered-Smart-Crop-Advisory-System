@@ -1,21 +1,23 @@
-import React, { useEffect } from 'react';
+import { useEffect } from "react";
 import { SignIn } from "@clerk/clerk-react";
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthProvider';
+import { useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "../../context/AuthProvider";
 
-/**
- * Login Component
- * Uses Clerk's pre-built SignIn component
- */
 const Login = () => {
-    const { isAuthenticated } = useAuth();
+    const { isAuthenticated, isLoaded } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
+
+    // Where the user originally wanted to go
+    const from = location.state?.from || "/";
 
     useEffect(() => {
+        if (!isLoaded) return;
+
         if (isAuthenticated) {
-            navigate("/", { replace: true });
+            navigate(from, { replace: true });
         }
-    }, [isAuthenticated, navigate]);
+    }, [isLoaded, isAuthenticated, from, navigate]);
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-transparent py-12 px-4 sm:px-6 lg:px-8">

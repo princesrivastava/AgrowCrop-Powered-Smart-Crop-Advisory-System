@@ -1,17 +1,14 @@
 import { Navigate, useLocation } from "react-router-dom";
-import { useAuth } from "../context/AuthProvider"; // Adjust import to use our AuthProvider
+import { useAuth } from "../context/AuthProvider";
 
 const ProtectedRoute = ({ children }) => {
     const { isAuthenticated, isLoaded } = useAuth();
     const location = useLocation();
 
-    if (!isLoaded) {
-        return <div>Loading...</div>; // Or a proper loading spinner
-    }
+    if (!isLoaded) return null;
 
     if (!isAuthenticated) {
-        // Redirect to login, but save the location they were trying to access
-        return <Navigate to="/login" state={{ from: location }} replace />;
+        return <Navigate to="/login" state={{ from: location.pathname }} replace />;
     }
 
     return children;
