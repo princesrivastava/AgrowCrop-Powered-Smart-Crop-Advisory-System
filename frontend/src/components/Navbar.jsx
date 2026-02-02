@@ -8,27 +8,41 @@ import { NavbarWeatherIcon, WeatherStatusIcon } from './WeatherIcons'
 import './Navbar.css'
 
 const Navbar = () => {
-  const { isWeatherVisible, toggleWeather, weather } = useWeather()
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <Link to="/" className="navbar-logo">
+        <Link to="/" className="navbar-logo" onClick={() => setIsMenuOpen(false)}>
           🌾 AgrowCrop
         </Link>
-        <ul className="navbar-menu">
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/recommendations">Recommendations</Link></li>
-          <li><Link to="/market-prices">Market Prices</Link></li>
-          <li><Link to="/crop-calendar">Crop Calendar</Link></li>
-          <li><Link to="/faq">FAQ</Link></li>
+
+        <div className="menu-icon" onClick={toggleMenu}>
+          <span className={isMenuOpen ? 'bar bar-active' : 'bar'}></span>
+          <span className={isMenuOpen ? 'bar bar-active' : 'bar'}></span>
+          <span className={isMenuOpen ? 'bar bar-active' : 'bar'}></span>
+        </div>
+
+        <ul className={`navbar-menu ${isMenuOpen ? 'active' : ''}`}>
+          <li><Link to="/" onClick={() => setIsMenuOpen(false)}>Home</Link></li>
+          <li><Link to="/recommendations" onClick={() => setIsMenuOpen(false)}>Recommendations</Link></li>
+          <li><Link to="/market-prices" onClick={() => setIsMenuOpen(false)}>Market Prices</Link></li>
+          <li><Link to="/crop-calendar" onClick={() => setIsMenuOpen(false)}>Crop Calendar</Link></li>
+          <li><Link to="/faq" onClick={() => setIsMenuOpen(false)}>FAQ</Link></li>
           <li className="theme-toggle-item">
             <ThemeToggle />
           </li>
           <li className="weather-icon-item">
             <span
               className={`weather-icon ${isWeatherVisible ? 'weather-icon-active' : ''}`}
-              onClick={toggleWeather}
+              onClick={() => {
+                toggleWeather();
+                setIsMenuOpen(false);
+              }}
               title={isWeatherVisible ? "Hide Weather" : "Show Weather"}
               style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             >

@@ -1,18 +1,14 @@
 import React from 'react';
-import { SignIn } from "@clerk/clerk-react";
+import { SignUp } from "@clerk/clerk-react";
 
-/**
- * Login Component
- * Uses Clerk's pre-built SignIn component
- */
-const Login = () => {
+const SignUpPage = () => {
     return (
         <div className="min-h-screen flex items-center justify-center bg-transparent py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full space-y-8 flex justify-center">
-                <SignIn signUpUrl="/sign-up" />
+                <SignUp signInUrl="/login" />
             </div>
         </div>
     );
 };
 
-export default Login;
+export default SignUpPage;

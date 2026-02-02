@@ -30,6 +30,7 @@ const AppContent = () => {
       <Navbar />
       <Routes>
         <Route path="/login" element={isAuthenticated ? <Navigate to="/" /> : <Login />} />
+        <Route path="/sign-up" element={isAuthenticated ? <Navigate to="/" /> : <SignUpPage />} />
 
         {/* Protected Routes */}
         <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />

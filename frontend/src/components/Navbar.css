@@ -60,14 +60,63 @@
   color: var(--green-1);
 }
 
+/* Menu Icon (Hamburger) */
+.menu-icon {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.bar {
+  width: 25px;
+  height: 3px;
+  background-color: var(--text);
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+/* Mobile Media Query */
 @media (max-width: 768px) {
-  .navbar-container {
-    flex-direction: column;
-    gap: 15px;
+  .menu-icon {
+    display: flex;
+    z-index: 1001;
+    /* Above menu */
+  }
+
+  /* Hamburger Animation */
+  .bar-active:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .bar-active:nth-child(2) {
+    opacity: 0;
+  }
+
+  .bar-active:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
   }
 
   .navbar-menu {
-    gap: 20px;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    /* Hidden off-screen */
+    width: 70%;
+    height: 100vh;
+    background: var(--bg);
+    /* Solid background */
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+  }
+
+  .navbar-menu.active {
+    right: 0;
+    /* Slide in */
   }
 }
 
