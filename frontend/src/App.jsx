@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./components/Home";
 import Recommendations from "./components/Recommendations";
 import CropCalendar from "./components/CropCalendar";
@@ -8,10 +8,12 @@ import Navbar from "./components/Navbar";
 import Login from "./components/auth/Login";
 import SignUpPage from "./components/auth/SignUp";
 import ProtectedRoute from "./components/ProtectedRoute";
-import { useAuth } from "./context/AuthProvider";
+import WeatherBackground from './components/WeatherBackground';
+import { WeatherProvider } from './context/WeatherContext';
+import { AuthProvider, useAuth } from "./context/AuthProvider";
 
 const AppRoutes = () => {
-  const { isLoaded } = useAuth();
+  const { isLoaded, isAuthenticated } = useAuth();
 
   if (!isLoaded) {
     return (
@@ -33,8 +35,8 @@ const AppRoutes = () => {
 
       <Routes>
         {/* Public routes – ALWAYS accessible */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/sign-up" element={<SignUpPage />} />
+        <Route path="/login" element={isAuthenticated ? <Navigate to="/" replace /> : <Login />} />
+        <Route path="/sign-up" element={isAuthenticated ? <Navigate to="/" replace /> : <SignUpPage />} />
 
         {/* Protected routes */}
         <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
@@ -48,4 +50,22 @@ const AppRoutes = () => {
   );
 };
 
-export default AppRoutes;
+const App = () => {
+  return (
+    <AuthProvider>
+      <WeatherProvider>
+        <Router
+          future={{
+            v7_startTransition: true,
+            v7_relativeSplatPath: true
+          }}
+        >
+          <WeatherBackground />
+          <AppRoutes />
+        </Router>
+      </WeatherProvider>
+    </AuthProvider>
+  )
+}
+
+export default App;
