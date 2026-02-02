@@ -8,6 +8,7 @@ import { NavbarWeatherIcon, WeatherStatusIcon } from './WeatherIcons'
 import './Navbar.css'
 
 const Navbar = () => {
+  const { isWeatherVisible, toggleWeather, weather } = useWeather()
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
