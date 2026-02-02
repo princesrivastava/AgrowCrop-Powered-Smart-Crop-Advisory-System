@@ -18,7 +18,15 @@ console.log("App rendered");
 
 // Inner App component that consumes Auth Context to access isAuthenticated
 const AppRoutes = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isLoaded } = useAuth();
+
+  if (!isLoaded) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', color: 'white' }}>
+        Loading...
+      </div>
+    );
+  }
 
   return (
     <div className="App">
